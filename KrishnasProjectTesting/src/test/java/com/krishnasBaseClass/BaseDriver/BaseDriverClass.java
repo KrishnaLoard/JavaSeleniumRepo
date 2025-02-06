@@ -1,56 +1,116 @@
 package com.krishnasBaseClass.BaseDriver;
 
+import java.io.FileReader;
+import java.lang.reflect.Type;
+import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.krishnas.KrishnasProjectTesting.pages.ArtofTestingPage;
 import com.krishnas.KrishnasProjectTesting.pages.GooglePageBase;
+import com.krishnas.KrishnasProjectTesting.pages.MainBasePage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseDriverClass {
-	
+
 	public WebDriver driver;
-	public GooglePageBase googleBasePage;
-
-	public BaseDriverClass() {
-		// TODO Auto-generated constructor stub
-		//System.setProperty("webdriver.chrome.driver", "/Users/kishanbheemajiyani/Eclipse/ChromeDriver/chromedriver-mac-arm64/chromedriver");
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		googleBasePage = new GooglePageBase(driver);
-		driver.get("https://www.google.com");
-
-        // Verify the page title
-        String title = driver.getTitle();
-        System.out.println("Page title is: " + title);
-
-        assert title.contains("Google") : "Title does not match!";
-	}
 	
+	//Pages Initialization 
+	public MainBasePage  basePage;
+	public GooglePageBase googleBasePage;
+	public ArtofTestingPage artofTestingPage;
+
+	public BaseDriverClass() throws Exception {
+		// TODO Auto-generated constructor stub
+		CollectionVariables.environmentConfiguration = new Gson();
+		FileReader configReader = ReadFileConfig(System.getProperty("user.dir") + "/SeleniumConfigFile.json");
+
+		Type typeConvert = new TypeToken<Map<String, Object>>() {
+
+			private static final long serialVersionUID = 1L;
+		}.getType();
+
+		// Map Configuration
+		Map<String, Object> configEnv = CollectionVariables.environmentConfiguration.fromJson(configReader,
+				typeConvert);
+		System.out.println("Environment Configuration File --> " + configEnv);
+
+		// Convert The TestSettings into the Object
+		CollectionVariables.configurationEnv = CollectionVariables.environmentConfiguration
+				.fromJson(configEnv.get("TestSettings").toString(), ConfigurationEnv.class);
+		
+		// IF Browser is Google Chrome
+		if (CollectionVariables.configurationEnv.getBrowserType().endsWith("chrome")) {
+
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+
+		} else if (CollectionVariables.configurationEnv.getBrowserType().endsWith("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();		
+		}
+
+		basePage = new GooglePageBase(driver);
+		googleBasePage = new GooglePageBase(driver);
+		artofTestingPage = new ArtofTestingPage(driver);
+		
+		//driver.get("https://" + CollectionVariables.configurationEnv.getBaseUrl());
+		driver.get(CollectionVariables.configurationEnv.getBaseUrl());
+
+		// Verify the page title
+		String title = driver.getTitle();
+		System.out.println("Page title is: " + title);
+		assert title.contains("Google") : "Title does not match!";
+	}
+
+	public FileReader ReadFileConfig(String FilePath) {
+		try {
+
+			return new FileReader(FilePath);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public void testGooglePage() {
 		try {
-			
+
 			System.out.print("Working Method of the Test Chrome");
+			CollectionVariables.LOGGER.info("This is Sample Logger Test");
+			CollectionVariables.LOGGER.warn("This Is Warning Message Testing");
+			CollectionVariables.LOGGER.error("This Is Error Message Testing");
 			Thread.sleep(5000);
 			driver.quit();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void CheckMethod() {
-		if(googleBasePage.islnkWithTextVisible("Gmail")) 
-		{
+		if (googleBasePage.islnkWithTextVisible("Gmail")) {
 			System.out.println("Gmail Link is Visibke Dont Worry");
 		}
 	}
-	
+
 	public static void main(String[] args) {
-		//BaseDriverClass baseDriverClass = new BaseDriverClass();		
-		//baseDriverClass.CheckMethod();
-		//baseDriverClass.testGooglePage();
+		try {
+			BaseDriverClass baseDriverClass = new BaseDriverClass();
+			baseDriverClass.CheckMethod();
+			baseDriverClass.testGooglePage();
+			System.out.println(baseDriverClass.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Working Directory --> " + System.getProperty("user.dir"));
 	}
 }

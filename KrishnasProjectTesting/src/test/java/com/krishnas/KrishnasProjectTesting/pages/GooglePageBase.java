@@ -3,7 +3,7 @@ package com.krishnas.KrishnasProjectTesting.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class GooglePageBase {
+public class GooglePageBase extends MainBasePage{
 
 	public WebDriver driver;
 	
@@ -13,6 +13,7 @@ public class GooglePageBase {
 
 	public GooglePageBase(WebDriver driver) {
 		// TODO Auto-generated constructor stub
+		super(driver);
 		this.driver = driver;
 	}
 	

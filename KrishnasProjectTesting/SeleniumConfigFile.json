@@ -1,7 +1,8 @@
 {
 	"TestSettings": {
-		"BrowserType": "Chrome",
+		"BrowserType": "firefox",
 		"TimeOut": "120",
-		"Country_of_birth": "India"
+		"Country_of_birth": "India",
+		"BaseUrl": "\"http://www.google.com\""
 	}
 }
