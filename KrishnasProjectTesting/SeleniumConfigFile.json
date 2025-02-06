@@ -1,0 +1,7 @@
+{
+	"TestSettings": {
+		"BrowserType": "Chrome",
+		"TimeOut": "120",
+		"Country_of_birth": "India"
+	}
+}
