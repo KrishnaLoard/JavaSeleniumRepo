@@ -100,17 +100,4 @@ public class BaseDriverClass {
 			System.out.println("Gmail Link is Visibke Dont Worry");
 		}
 	}
-
-	public static void main(String[] args) {
-		try {
-			BaseDriverClass baseDriverClass = new BaseDriverClass();
-			baseDriverClass.CheckMethod();
-			baseDriverClass.testGooglePage();
-			System.out.println(baseDriverClass.toString());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("Working Directory --> " + System.getProperty("user.dir"));
-	}
 }
