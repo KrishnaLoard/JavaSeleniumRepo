@@ -1,7 +1,6 @@
 package com.krishnas.KrishnasProjectTesting.suites;
 
 import org.testng.annotations.Test;
-
 import com.krishnasBaseClass.BaseDriver.BaseDriverClass;
 import com.krishnasBaseClass.BaseDriver.CollectionVariables;
 
@@ -14,17 +13,18 @@ public class ArtOfTestingPageCase1 extends BaseDriverClass {
 	
 	@Test
 	public void ElementPresetTest() {
+				
 		CollectionVariables.LOGGER.info("Starting Test Case --> " + this.getClass().getCanonicalName());
-	}
-
-	public static void main(String[] args) {
-		try {
-			ArtOfTestingPageCase1 Test1 = new ArtOfTestingPageCase1();
-			System.out.println(Test1.toString());
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-			CollectionVariables.LOGGER.error("Error into the Test Case --> " + e.getMessage());
-		}
+		CollectionVariables.LOGGER.info("STEP: 1 --> Loading the Art Page");
+		driver.get("https://artoftesting.com/samplesiteforselenium");
+		
+		CollectionVariables.LOGGER.info("STEP: 2 --> Checking the Link on the page");
+		boolean linkVisble = artofTestingPage.CheckifElementPresent(artofTestingPage.lnkWithText("This is a link"));
+		
+		CollectionVariables.LOGGER.info("Expected OutPut --> Checking This is Link Avaiable");
+		assert linkVisble == true : "This is Link is not Availe on the ArtofTesting Page";
+		
+		CollectionVariables.LOGGER.info("Killing Driver Instance");
+		testGooglePage();
 	}
 }

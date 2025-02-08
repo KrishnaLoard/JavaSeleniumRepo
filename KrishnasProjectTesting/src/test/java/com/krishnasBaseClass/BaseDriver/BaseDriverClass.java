@@ -2,11 +2,10 @@ package com.krishnasBaseClass.BaseDriver;
 
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.Map;
+ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.krishnas.KrishnasProjectTesting.pages.ArtofTestingPage;
@@ -53,8 +52,8 @@ public class BaseDriverClass {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();		
 		}
-
-		basePage = new GooglePageBase(driver);
+		driver.manage().window().maximize();
+		basePage = new MainBasePage(driver);
 		googleBasePage = new GooglePageBase(driver);
 		artofTestingPage = new ArtofTestingPage(driver);
 		
