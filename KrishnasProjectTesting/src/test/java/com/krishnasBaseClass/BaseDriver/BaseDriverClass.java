@@ -2,10 +2,13 @@ package com.krishnasBaseClass.BaseDriver;
 
 import java.io.FileReader;
 import java.lang.reflect.Type;
- import java.util.Map;
+import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.krishnas.KrishnasProjectTesting.pages.ArtofTestingPage;
@@ -22,6 +25,11 @@ public class BaseDriverClass {
 	public MainBasePage  basePage;
 	public GooglePageBase googleBasePage;
 	public ArtofTestingPage artofTestingPage;
+	
+	@BeforeTest
+	public void BeforeTestMethod() {
+		
+	}
 
 	public BaseDriverClass() throws Exception {
 		// TODO Auto-generated constructor stub
@@ -78,7 +86,8 @@ public class BaseDriverClass {
 		}
 	}
 
-	public void testGooglePage() {
+	@AfterTest
+	public void AfterTestMethod() {
 		try {
 
 			System.out.print("Working Method of the Test Chrome");
@@ -86,6 +95,7 @@ public class BaseDriverClass {
 			CollectionVariables.LOGGER.warn("This Is Warning Message Testing");
 			CollectionVariables.LOGGER.error("This Is Error Message Testing");
 			Thread.sleep(5000);
+			CollectionVariables.LOGGER.info("Killing Driver Instance");
 			driver.quit();
 
 		} catch (Exception e) {

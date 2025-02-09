@@ -1,5 +1,0 @@
-2025-02-06 12:22:18 -  INFO [main] i.g.b.w.WebDriverManager - Using geckodriver 0.35.0 (resolved driver for Firefox 135)
-2025-02-06 12:22:18 -  INFO [main] i.g.b.w.WebDriverManager - Exporting webdriver.gecko.driver as /Users/kishanbheemajiyani/.cache/selenium/geckodriver/mac-arm64/0.35.0/geckodriver
-2025-02-06 12:22:22 -  INFO [main] c.k.B.CollectionVariables - This is Sample Logger Test
-2025-02-06 12:22:22 -  WARN [main] c.k.B.CollectionVariables - This Is Warning Message Testing
-2025-02-06 12:22:22 - ERROR [main] c.k.B.CollectionVariables - This Is Error Message Testing

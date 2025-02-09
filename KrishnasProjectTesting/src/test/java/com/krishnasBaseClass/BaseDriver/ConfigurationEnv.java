@@ -10,6 +10,8 @@ public class ConfigurationEnv {
 
 	private String Country_of_birth;
 
+	private String Case1Url;
+
 	@SerializedName("BaseUrl")
 	private String BaseUrl;
 
@@ -47,5 +49,13 @@ public class ConfigurationEnv {
 
 	public void setBaseUrl(String baseUrl) {
 		this.BaseUrl = baseUrl;
+	}
+
+	public String getCase1Url() {
+		return Case1Url;
+	}
+
+	public void setCase1Url(String case1Url) {
+		Case1Url = case1Url;
 	}
 }

@@ -3,7 +3,9 @@ package com.krishnas.KrishnasProjectTesting.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,12 +15,14 @@ public class MainBasePage {
 
 	WebDriver driver;
 	WebDriverWait driverWait;
+	JavascriptExecutor executor;
 
 	public MainBasePage(WebDriver driver) {
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		driverWait = new WebDriverWait(driver,
 				Duration.ofSeconds(Integer.parseInt(CollectionVariables.configurationEnv.getTimeOut())));
+		executor = (JavascriptExecutor) driver;
 	}
 
 	public By lnkWithText(String linktxt) {
@@ -32,6 +36,10 @@ public class MainBasePage {
 	public By btnWithId(String btnId) {
 		return By.xpath(String.format("//button[@id='%s']", btnId));
 	}
+	
+	public By inputWithText(String txt) {
+		return By.xpath(String.format("//input[text()='%s']", txt));
+	}
 
 	public boolean CheckifElementPresent(By locatorPath) {
 		try {
@@ -41,7 +49,37 @@ public class MainBasePage {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			CollectionVariables.LOGGER.error("Error Message in Method CheckifElementPresent --> " + e.getMessage());
+			// e.printStackTrace();
 			return false;
 		}
+	}
+
+	public boolean CheckifElementPresentWithScroll(By locatorPath) {
+
+		try {
+
+			while (!CheckifElementPresent(locatorPath)) {
+				WebElement element = driver.findElement(locatorPath);
+				executor.executeScript("arguments[0].scrollIntoView(false);", element);
+				Thread.sleep(2000);
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			CollectionVariables.LOGGER
+					.error("Error Message in Method CheckifElementPresentWithScroll --> " + e.getMessage());
+			// e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean ScrollSingle(int Times) throws Exception {
+		while (Times > 0) {
+			executor.executeScript("window.scrollBy(0, 250)");
+			Thread.sleep(3000);
+			Times--;
+		}
+		return true;
 	}
 }
