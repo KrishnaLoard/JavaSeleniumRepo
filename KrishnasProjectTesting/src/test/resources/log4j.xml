@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<File name="FileLogger" fileName="logs/application.log"> <!-- Log file path -->
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</File>
+		
+		<appender name="ROLLING_FILE"
+			class="org.apache.log4j.RollingFileAppender">
+			<param name="file" value="logs/app.log" />
+			<param name="MaxFileSize" value="10MB" />
+			<param name="MaxBackupIndex" value="5" />
+			<layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern"
+					value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+			</layout>
+		</appender>
+	</Appenders>
+
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="ROLLING_FILE" />
+		</Root>
+	</Loggers>
+</Configuration>
