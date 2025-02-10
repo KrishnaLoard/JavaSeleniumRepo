@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeTest;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.krishnas.KrishnasProjectTesting.pages.ArtofTestingPage;
+import com.krishnas.KrishnasProjectTesting.pages.CommonMethods;
 import com.krishnas.KrishnasProjectTesting.pages.GooglePageBase;
 import com.krishnas.KrishnasProjectTesting.pages.MainBasePage;
 
@@ -25,6 +26,7 @@ public class BaseDriverClass {
 	public MainBasePage  basePage;
 	public GooglePageBase googleBasePage;
 	public ArtofTestingPage artofTestingPage;
+	public CommonMethods commonMethods;
 	
 	@BeforeTest
 	public void BeforeTestMethod() {
@@ -64,6 +66,7 @@ public class BaseDriverClass {
 		basePage = new MainBasePage(driver);
 		googleBasePage = new GooglePageBase(driver);
 		artofTestingPage = new ArtofTestingPage(driver);
+		commonMethods = new CommonMethods(driver);
 		
 		//driver.get("https://" + CollectionVariables.configurationEnv.getBaseUrl());
 		driver.get(CollectionVariables.configurationEnv.getBaseUrl());

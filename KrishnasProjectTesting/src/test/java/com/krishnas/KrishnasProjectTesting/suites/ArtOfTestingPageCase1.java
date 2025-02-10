@@ -64,6 +64,30 @@ public class ArtOfTestingPageCase1 extends BaseDriverClass {
 			
 			CollectionVariables.LOGGER.info("Expected OutPut --> Check Box Testing");
 			Assert.assertTrue(chkBoxAutomationTesting, "Check Box Automation Testing not Found");
+			
+			CollectionVariables.LOGGER.info("STEP: 9 --> Check Box Testing");
+			boolean chkBoxPerformanceTesting = driver.findElement(By.xpath("//input[@class='Performance']")).isDisplayed();
+			
+			CollectionVariables.LOGGER.info("Expected OutPut --> Check Box Testing");
+			Assert.assertTrue(chkBoxPerformanceTesting, "Check Box Automation Testing not Found");
+			
+			CollectionVariables.LOGGER.info("STEP: 10 --> Check Box Testing");
+			boolean selectWithId = artofTestingPage.CheckifElementPresent(artofTestingPage.selectWithId("testingDropdown"));
+			
+			CollectionVariables.LOGGER.info("Expected OutPut --> Check Box Testing");
+			Assert.assertTrue(selectWithId, "Check Box Automation Testing not Found");
+			
+			CollectionVariables.LOGGER.info("STEP: 11 --> Find the Button with Text");
+			boolean buttonWithText = artofTestingPage.CheckifElementPresent(artofTestingPage.btnWithText("Generate Alert Box"));
+			
+			CollectionVariables.LOGGER.info("Expected OutPut --> Find the Button with Text");
+			Assert.assertTrue(buttonWithText, "Check Box Automation Testing not Found");
+
+			CollectionVariables.LOGGER.info("STEP: 11 --> Find the Button with Text");
+			boolean buttonWithText2 = artofTestingPage.CheckifElementPresent(artofTestingPage.btnWithText("Generate Confirm Box"));
+			
+			CollectionVariables.LOGGER.info("Expected OutPut --> Find the Button with Text");
+			Assert.assertTrue(buttonWithText2, "Check Box Automation Testing not Found");
 
 		} catch (Exception e) {
 			// TODO: handle exception

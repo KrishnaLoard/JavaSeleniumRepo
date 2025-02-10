@@ -36,9 +36,17 @@ public class MainBasePage {
 	public By btnWithId(String btnId) {
 		return By.xpath(String.format("//button[@id='%s']", btnId));
 	}
-	
+
 	public By inputWithText(String txt) {
 		return By.xpath(String.format("//input[text()='%s']", txt));
+	}
+
+	public By selectWithId(String txtid) {
+		return By.xpath(String.format("//select[@id='%s']", txtid));
+	}
+
+	public By btnWithText(String btnTxt) {
+		return By.xpath(String.format("//button[text(),'%s']", btnTxt));
 	}
 
 	public boolean CheckifElementPresent(By locatorPath) {
